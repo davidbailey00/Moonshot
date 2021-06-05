@@ -7,15 +7,29 @@
 
 import SwiftUI
 
+struct CustomText: View {
+    var text: String
+
+    var body: some View {
+        Text(text)
+    }
+
+    init(_ text: String) {
+        print("Creating new custom text")
+        self.text = text
+    }
+}
+
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image("staircase")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: .infinity)
+        ScrollView(.vertical) {
+            VStack {
+                ForEach(0 ..< 100) {
+                    CustomText("Item \($0)").font(.title)
+                }
+            }
+            .frame(maxWidth: .infinity)
         }
-        .padding()
     }
 }
 
