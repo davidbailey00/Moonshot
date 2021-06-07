@@ -16,7 +16,7 @@ struct AstronautView: View {
                 Image(astronaut.id)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: .infinity)
+                    .frame(maxWidth: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .padding(.bottom)
 
