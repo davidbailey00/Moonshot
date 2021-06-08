@@ -14,6 +14,7 @@ struct MissionView: View {
     }
 
     let mission: Mission
+    let missions: [Mission]
     let crew: [CrewMember]
 
     var body: some View {
@@ -43,26 +44,25 @@ struct MissionView: View {
                 ForEach(crew, id: \.role) { crewMember in
                     NavigationLink(
                         destination: AstronautView(
-                            astronaut: crewMember.astronaut
+                            astronaut: crewMember.astronaut,
+                            missions: missions
                         )
                     ) {
-                        HStack {
-                            Image(crewMember.astronaut.id)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 40)
-                                .clipShape(Capsule())
-                                .padding(.trailing, 8)
+                        Image(crewMember.astronaut.id)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 50, height: 40)
+                            .clipShape(Capsule())
+                            .padding(.trailing, 4)
 
-                            VStack(alignment: .leading) {
-                                Text(crewMember.astronaut.name)
-                                    .font(.headline)
-                                Text(crewMember.role)
-                                    .foregroundColor(.secondary)
-                            }
-
-                            Spacer()
+                        VStack(alignment: .leading) {
+                            Text(crewMember.astronaut.name)
+                                .font(.headline)
+                            Text(crewMember.role)
+                                .foregroundColor(.secondary)
                         }
+
+                        Spacer()
                     }
                 }
             }
@@ -72,8 +72,9 @@ struct MissionView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    init(mission: Mission, astronauts: [Astronaut]) {
+    init(mission: Mission, missions: [Mission], astronauts: [Astronaut]) {
         self.mission = mission
+        self.missions = missions
         var crew = [CrewMember]()
 
         for member in mission.crew {
@@ -91,7 +92,11 @@ struct MissionView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            MissionView(mission: missions[0], astronauts: astronauts)
+            MissionView(
+                mission: missions[0],
+                missions: missions,
+                astronauts: astronauts
+            )
         }
     }
 }
