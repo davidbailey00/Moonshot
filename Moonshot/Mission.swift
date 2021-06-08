@@ -30,4 +30,11 @@ struct Mission: Codable, Identifiable {
             return "Did not launch"
         }
     }
+
+    func getCrewNames(with astronauts: [Astronaut]) -> [String] {
+        return crew.map { member in
+            let match = astronauts.first { $0.id == member.name }!
+            return match.name
+        }
+    }
 }
