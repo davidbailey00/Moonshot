@@ -25,6 +25,11 @@ struct MissionView: View {
                     .frame(maxWidth: .infinity)
                     .padding(30)
 
+                Text("Launch date: \(mission.formattedLaunchDate)")
+                    .font(.headline)
+                    .padding(.bottom)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
                 ForEach(
                     mission.description.components(separatedBy: .newlines),
                     id: \.self
